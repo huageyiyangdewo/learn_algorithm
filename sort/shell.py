@@ -18,6 +18,7 @@ class ShellSort(object):
         # 增长量h的确定规则
         while h < (arr_length / 2):
             h = 2 * h + 1
+
         # h的减少量
         reduction = h // 2
         # 循环次数
@@ -28,9 +29,20 @@ class ShellSort(object):
                 # 这里的有序列表指的是:从j开始往前推，所有距离为i的元素，终止元素为0
                 for z in range(j, 0, -i):
                     if arr[z] < arr[z-i]:
-                        ShellSort.exchange(arr, z, z-i)
+                        arr[z], arr[z-i] = arr[z-i], arr[z]
+                    else:
+                        break
 
     @staticmethod
-    def exchange(arr, i, j):
-        # 交换索引为i, j的值
-        arr[i], arr[j] = arr[j], arr[i]
+    def sort_better(arr):
+        b = len(arr)  # 列表长度
+        gap = b // 2  # 初始步长设置为总长度的一半
+        while gap >= 1:
+            for i in range(b):
+                j = i
+                # 两个作用： j>=gap -> 找到待插入的元素
+                # arr[j - gap] > arr[j] -> 与前面排好序的列表比较
+                while j >= gap and arr[j - gap] > arr[j]:  # 在每一组里面进行直接插入排序
+                    arr[j], arr[j - gap] = arr[j - gap], arr[j]
+                    j -= gap
+            gap = gap // 2  # 更新步长
