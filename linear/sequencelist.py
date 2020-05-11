@@ -47,7 +47,8 @@ class SequenceList(object):
     def append(self, value):
         # 在表尾插入一个元素
         if self.num >= self.max:
-            self.data = self.data * 2
+            self.data = self.resize(self.max * 2)
+            self.max = self.max * 2
         self.data[self.num] = value
         self.num += 1
 
@@ -57,7 +58,8 @@ class SequenceList(object):
             raise IndexError
 
         if self.num >= self.max:
-            self.data = self.data * 2
+            self.data = self.resize(self.max * 2)
+            self.max = self.max * 2
 
         if 0 <= index < self.max:
             for i in range(self.num, index, -1):
@@ -77,8 +79,18 @@ class SequenceList(object):
                 self.data[i] = self.data[i + 1]
             self.num -= 1
 
+            if self.num < self.max / 4:
+                self.data = self.resize(int(self.max * 0.5))
+                self.max = int(self.max * 0.5)
         else:
             raise IndexError
+
+    def resize(self, new_size):
+        # 动态扩充顺序表
+        new_data = [None] * new_size
+        for i in range(self.num):
+            new_data[i] = self.data[i]
+        return new_data
 
     # 销毁线性表
     def destroy(self):
