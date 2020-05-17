@@ -114,5 +114,32 @@ class SingleLinkList(object):
 
         return -1
 
+    def reserve(self):
+        '''反转链表'''
+
+        # 判断链表是否为空，为空则返回，否则调用node_reserve方法，反转每一个节点
+        if self.is_empty():
+            return None
+
+        self.node_reserve(self._head)
+
+    def node_reserve(self, curr):
+        '''反转指定的结点curr，并把反转后的结点返回'''
+
+        if curr.next is None:
+            self._head = curr
+            return curr
+
+        # 递归的反转当前结点curr的下一个结点；返回值就是链表反转后，当前结点的上一个结点
+        prev = self.node_reserve(curr.next)
+
+        # 让返回的结点的下一个结点变为当前结点curr；
+        prev.next = curr
+
+        # 把当前结点的下一个结点变为null
+        curr.next = None
+        return curr
+
+
 
 
