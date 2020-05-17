@@ -39,12 +39,13 @@ class CycleLinkCheck(object):
             fast = fast.next.next
             slow = slow.next
 
-            # 快指针的地址和慢指针的地址相同，则说明有环
-            if fast is slow:
-                intersection_point = slow
-                temp = s_link._head
-                # 注意，这里必须加continue
-                continue
+            if temp is None:
+                # 快指针的地址和慢指针的地址相同，则说明有环
+                if fast is slow:
+                    intersection_point = slow
+                    temp = s_link._head
+                    # 注意，这里必须加continue
+                    continue
 
             if temp is not None:
                 temp = temp.next
