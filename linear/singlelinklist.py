@@ -7,8 +7,8 @@ class SingleNode(object):
 
 class SingleLinkList(object):
     """单链表"""
-    def __init__(self):
-        self._head = None
+    def __init__(self, _head=None):
+        self._head = _head
 
     def is_empty(self):
         """判断链表是否为空"""
