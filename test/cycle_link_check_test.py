@@ -19,3 +19,5 @@ f.next = c
 s_link = SingleLinkList(a)
 
 print(CycleLinkCheck.is_cycle(s_link))
+h = CycleLinkCheck.get_entrance(s_link)
+print(h.item)
