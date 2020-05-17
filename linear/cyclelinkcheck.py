@@ -31,6 +31,7 @@ class CycleLinkCheck(object):
             return False
         fast = slow = s_link._head
         temp = None  # 临时指针
+        intersection_point = None  # 存储相交的节点，在收尾相交的单链表中，用于判断
 
         # 遍历链表，先找到环(快慢指针相遇),准备一个临时指针，
         # 指向链表的首结点，继续遍历，直到慢指针和临时指针相遇，那么相遇时所指向的结点就是环的入口
@@ -40,6 +41,7 @@ class CycleLinkCheck(object):
 
             # 快指针的地址和慢指针的地址相同，则说明有环
             if fast is slow:
+                intersection_point = slow
                 temp = s_link._head
                 # 注意，这里必须加continue
                 continue
@@ -48,6 +50,8 @@ class CycleLinkCheck(object):
                 temp = temp.next
                 # 临时指针和慢指针相遇，找到入口
                 if temp is slow:
+                    if intersection_point is s_link._head:
+                        temp = intersection_point
                     break
 
         return temp

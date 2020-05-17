@@ -14,10 +14,14 @@ b.next = c
 c.next = d
 d.next = e
 e.next = f
-f.next = c
+f.next = a
 
 s_link = SingleLinkList(a)
+# s_link.travel()
+# print('-' * 10)
 
 print(CycleLinkCheck.is_cycle(s_link))
 h = CycleLinkCheck.get_entrance(s_link)
+# print(h)
+# print(b)
 print(h.item)
