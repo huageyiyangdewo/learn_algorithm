@@ -18,7 +18,7 @@ class ReservePolishNotation(object):
                 if not o1 or not o2:
                     return False
 
-                t_str = o1 + exp + o2
+                t_str = o2 + exp + o1
                 ret = eval(t_str)
                 new_stack.push(str(ret))
             else:
