@@ -7,29 +7,31 @@ class SymbolNode(object):
         self.next = next_nd
 
 
-class SymbolTable(object):
-    '''符号表'''
+class OrderSymbolTable(object):
+    '''有序符号表'''
 
     def __init__(self):
         self._head = SymbolNode(None, None, None)
         self.num = 0
 
-    def put(self, key, value):
+    def put(self, key: int, value):
         '''插入键值对'''
-        curr = self._head
-        # 判断key是否存在
-        while curr.next is not None:
+        curr = self._head.next
+        pre = self._head
+        while curr is not None and curr.key != key:
+            pre = curr
             curr = curr.next
-            if curr.key == key:
-                curr.value = value
-                return
+
+        if curr is not None and curr.key == key:
+            curr.value = value
+            return
 
         # key不存在
-        new_node = SymbolNode(key, value, self._head.next)
-        self._head.next = new_node
+        new_node = SymbolNode(key, value, curr)
+        pre.next = new_node
         self.num += 1
 
-    def delete(self, key):
+    def delete(self, key: int):
         '''删除key'''
 
         head = self._head
@@ -41,7 +43,7 @@ class SymbolTable(object):
 
             head = head.next
 
-    def get(self, key):
+    def get(self, key: int):
         head = self._head
         while head.next is not None:
             if head.next.key == key:
