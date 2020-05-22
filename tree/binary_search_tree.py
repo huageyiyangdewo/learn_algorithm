@@ -1,3 +1,7 @@
+from linear.singlelinklist import SingleLinkList
+from queue_l.queue_link import Queue
+
+
 class Node(object):
     '''树节点'''
     def __init__(self, key: int, value, left, right):
@@ -166,3 +170,78 @@ class BinarySearchTree(object):
     # 查找整个树中最大的键
     def max(self):
         return self._max(self.root)
+
+    def _pre_ergodic(self, node: Node, que: SingleLinkList):
+        if node is None:
+            return None
+
+        que.append(node)
+        if node.left is not None:
+            self._pre_ergodic(node.left, que)
+        if node.right is not None:
+            self._pre_ergodic(node.right, que)
+
+    # 获取指定树x的所有键，并放到keys队列中
+    def pre_ergodic(self):
+        '''前序遍历：先遍历根节点，再遍历左子树，再右子树'''
+        keys = SingleLinkList()
+        self._pre_ergodic(self.root, keys)
+        return keys
+
+    def _mid_ergodic(self, node: Node, que: SingleLinkList):
+        if node is None:
+            return node
+
+        if node.left is not None:
+            self._mid_ergodic(node.left, que)
+
+        que.append(node)
+
+        if node.right is not None:
+            self._mid_ergodic(node.right, que)
+
+    def mid_ergodic(self):
+        '''中序遍历：先遍历左子树，再遍历根节点，再右子树'''
+        keys = SingleLinkList()
+        self._mid_ergodic(self.root, keys)
+        return keys
+
+    def _suf_ergodic(self, node: Node, que: SingleLinkList):
+        if node is None:
+            return node
+
+        if node.left is not None:
+            self._suf_ergodic(node.left, que)
+
+        if node.right is not None:
+            self._suf_ergodic(node.right, que)
+
+        que.append(node)
+
+    def suf_ergodic(self):
+        '''后序遍历：先遍历左子树，再遍历右子树，再根节点'''
+        keys = SingleLinkList()
+        self._suf_ergodic(self.root, keys)
+        return keys
+
+    def layer_ergodic(self):
+        '''层序遍历：从根节点开始，依次往下，获取每一层节点的所有值'''
+        # 存储所有的节点
+        keys = Queue()
+        # 辅助队列
+        nodes = Queue()
+
+        nodes.enqueue(self.root)
+
+        while not nodes.is_empty():
+            # 从队列中弹出一个结点，把key放入到keys中
+            temp = nodes.dequeue()
+            keys.enqueue(temp)
+
+            # 判断当前结点还有没有左子结点，如果有，则放入到nodes中
+            if temp.left is not None:
+                nodes.enqueue(temp.left)
+            # 判断当前结点还有没有右子结点，如果有，则放入到nodes中
+            if temp.right is not None:
+                nodes.enqueue(temp.right)
+        return keys
