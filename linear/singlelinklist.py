@@ -10,6 +10,14 @@ class SingleLinkList(object):
     def __init__(self, _head=None):
         self._head = _head
 
+    def __iter__(self):
+        '''实现可迭代对象'''
+        cur = self._head
+        while cur.next is not None:
+            yield cur
+            cur = cur.next
+        yield cur
+
     def is_empty(self):
         """判断链表是否为空"""
         return self._head is None
@@ -139,6 +147,19 @@ class SingleLinkList(object):
         # 把当前结点的下一个结点变为null
         curr.next = None
         return curr
+
+    def get_mid(self):
+        '''通过快慢指针的方式，获取链表中的中间值
+            快指针步长一般为慢指针两倍
+        '''
+
+        fast = slow = self._head
+
+        while fast is not None and fast.next is not None:
+            fast = fast.next.next
+            slow = slow.next
+
+        return slow.item
 
 
 
