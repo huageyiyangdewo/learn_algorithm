@@ -42,3 +42,6 @@ print('2222222222')
 keys_que = new_tree.layer_ergodic()
 for i in keys_que:
     print(i.item.value)
+
+print('888888888888888')
+print(new_tree.max_depth())

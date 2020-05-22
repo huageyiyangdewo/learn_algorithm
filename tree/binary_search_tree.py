@@ -245,3 +245,29 @@ class BinarySearchTree(object):
             if temp.right is not None:
                 nodes.enqueue(temp.right)
         return keys
+
+    def _max_depth(self, node: Node):
+        if node is None:
+            return 0
+
+        # node的最大深度
+        max_node = 0
+        # 左子树的最大深度
+        max_l = 0
+        # 右子树的最大深度
+        max_r = 0
+
+        # 计算node结点左子树的最大深度
+        if node.left is not None:
+            max_l = self._max_depth(node.left)
+
+        if node.right is not None:
+            max_r = self._max_depth(node.right)
+
+        # 比较左子树最大深度和右子树最大深度，取较大值+1即可
+        max_node = max_l + 1 if max_l > max_r else max_r + 1
+        return max_node
+
+    def max_depth(self):
+        '''获取整个树的最大深度'''
+        return self._max_depth(self.root)
