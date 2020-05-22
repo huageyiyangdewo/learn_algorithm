@@ -8,6 +8,14 @@ class Queue(object):
         self._last = None
         self.num = 0
 
+    def __iter__(self):
+        '''实现可迭代对象'''
+        cur = self._head.next
+        while cur.next is not None:
+            yield cur
+            cur = cur.next
+        yield cur
+
     def is_empty(self):
         return self.num == 0
 
