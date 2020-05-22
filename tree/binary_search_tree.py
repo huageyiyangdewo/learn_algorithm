@@ -141,4 +141,28 @@ class BinarySearchTree(object):
 
         return self._delete(key, self.root)
 
+    def _min(self, node: Node):
 
+        if node is None:
+            return Node
+
+        while node.left is not None:
+            node = node.left
+        return node.key
+
+    # 查找整个树中最小的键
+    def min(self):
+        return self._min(self.root)
+
+    def _max(self, node: Node):
+
+        if node is None:
+            return Node
+
+        while node.right is not None:
+            node = node.right
+        return node.key
+
+    # 查找整个树中最大的键
+    def max(self):
+        return self._max(self.root)
