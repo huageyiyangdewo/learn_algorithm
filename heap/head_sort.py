@@ -23,7 +23,7 @@ class HeapSort(object):
         heap.insert(0, None)
 
         # 对堆中的元素做下沉调整(从长度的一半处开始，往索引1处扫描)
-        for i in range(len(source), 0, -1):
+        for i in range(len(source) // 2, 0, -1):
             HeapSort.sink(heap, i, len(source)-1)
         return heap
 
