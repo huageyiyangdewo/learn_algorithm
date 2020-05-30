@@ -20,11 +20,12 @@ class DepthFirstSearch(object):
 
         # 遍历顶点v的邻接表，拿到每一个相邻的顶点，继续递归搜索
         w = g.get_adj(v).dequeue()
-        while w:
+        while w is not False:
             # 如果顶点w没有被搜索，则继续递归搜索
             if not self.marked[w]:
                 self.dfs(g, w)
-            w = g.get_adj(v).dequeue()
+            else:
+                w = g.get_adj(v).dequeue()
 
         # 相通顶点数量 + 1
         self.count += 1

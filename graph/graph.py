@@ -9,7 +9,7 @@ class Graph(object):
         # 边的数量
         self.e = 0
         # 邻接表
-        self.adj = [Queue()] * n
+        self.adj = [Queue() for i in range(v)]
 
     def get_v(self):
         '''获取顶点数目'''
