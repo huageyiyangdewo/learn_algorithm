@@ -1,7 +1,8 @@
 from queue_l.queue_link import Queue
 
 
-class Graph(object):
+class DiGraph(object):
+    '''有向图'''
 
     def __init__(self, v):
         # 顶点数目
@@ -20,14 +21,26 @@ class Graph(object):
         return self.e
 
     def add_edge(self, v, w):
-        '''向图中添加一条边 v-w'''
-        # 在无向图中，边是没有方向的，所以该边既可以说是从v到w的边，又可以说是从w到v的边，
-        # 因此，需要让w出现在v的邻接表中，并且还要让v出现在w的邻接表中
+        '''向图中添加一条边 v->w'''
+        # //只需要让顶点w出现在顶点v的邻接表中，因为边是有方向的，
+        # 最终，顶点v的邻接表中存储的相邻顶点的含义是：  v->其他顶点
         self.adj[v].enqueue(w)
-        self.adj[w].enqueue(v)
 
         self.e += 1
 
     def get_adj(self, v):
         '''获取和顶点v相邻的所有顶点'''
         return self.adj[v]
+
+    def reserve(self):
+        '''该图的反向图'''
+
+        r = DiGraph(self.v)
+        for v in range(self.v):
+            # 获取由该顶点v指出的所有边
+
+            w = self.get_adj(v).dequeue()
+            while w is not False:
+                r.add_edge(w, v)
+
+        return r
