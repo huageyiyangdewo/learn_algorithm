@@ -116,8 +116,8 @@ class IndexMinPriorityQueue(object):
 
     def change_item(self, i, item):
         '''把与索引i关联的元素修改为为t'''
-        if i < 0 or i > self.num:
-            raise Exception('index error')
+        # if i < 0 or i > self.num:
+        #     raise Exception('index error')
 
         # 修改items数组中i位置的元素为t
         self.item[i] = item
