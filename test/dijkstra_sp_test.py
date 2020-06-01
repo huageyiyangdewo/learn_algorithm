@@ -64,3 +64,9 @@ while not edges.is_empty():
     e = edges.dequeue()
     print('from:{}-->to:{}, weight:{}'.format(str(e.from_v()), str(e.to()), e.weight()))
 
+'''
+from:3-->to:6, weight:0.52
+from:7-->to:3, weight:0.39
+from:2-->to:7, weight:0.34
+from:0-->to:2, weight:0.26
+'''
