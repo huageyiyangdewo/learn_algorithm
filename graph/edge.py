@@ -24,12 +24,13 @@ class Edge(object):
         else:
             return self._v
 
-    def comparable_to(self, that):
+    def __lt__(self, that):
+        '''小于'''
         # 获取边上的一个点
         if self._weight > that._weight:
-            # 如果当前边的权重值大，则让cmp=1
-            return 1
+            # 如果当前边的权重值大，则返回Fasle
+            return False
         elif self._weight < that._weight:
-            return -1
+            return True
         else:
-            return 0
+            return True
